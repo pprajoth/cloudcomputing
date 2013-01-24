@@ -14,11 +14,7 @@
       function MyController($scope, $http, $resource){
         $scope.url = "https://www.googleapis.com/customsearch/v1?key=AIzaSyByWKfDuuksq5d2btVhq1OMW6a3gotzc68&cx=002533956068283787911:00ans29obhy&q=flowers&alt=json&fields=queries(request(totalResults))";
         $scope.newMessage = "";
-        $scope.messages = ["Steve Jobs - 515,000,000 results"]; 
-        $scope.Model = $resource("https://www.googleapis.com/customsearch/v1?key=AIzaSyByWKfDuuksq5d2btVhq1OMW6a3gotzc68&cx=002533956068283787911:00ans29obhy&q=flowers&alt=json&fields=queries(request(totalResults))",
-                                {},{'get': {method: 'JSONP', isArray: false, params:{callback: 'JSON_CALLBACK'}}
-                                   }
-                            );  
+        $scope.messages = ["Steve Jobs - 515,000,000 results"];  
                             
         $scope.add = function(){
          
@@ -30,8 +26,6 @@
          var urlConcat1 = url1.concat(searchTerm);
          var url2 = "&alt=json&fields=queries(request(totalResults))";
          var finalURL = urlConcat1.concat(url2);
-         
-         $scope.temp = $scope.Model.get();
          
           $.getJSON (finalURL, function(response) {
            
@@ -53,7 +47,7 @@
           var resultFormatted = resultPreformatted.concat(numFormatted);
           var finalResult = resultFormatted.concat(" results");
           $scope.newMessage = finalResult;
-          //alert($scope.newMessage);
+          alert($scope.newMessage);
           $scope.messages.push($scope.newMessage);
           $scope.messages = $scope.messages; 
           });
